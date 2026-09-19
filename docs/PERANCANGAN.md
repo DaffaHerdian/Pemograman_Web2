@@ -1,5 +1,9 @@
 # PERANCANGAN SISTEM KOPERASIKU
 
+## Link Figma
+
+[https://www.figma.com/design/NA6CmiWARcpyFTJdK8S0IZ/Pemograman-2?node-id=0-1&t=iIBnLhuqvVecCr02-1](https://www.figma.com/design/NA6CmiWARcpyFTJdK8S0IZ/Pemograman-2?node-id=0-1&t=TwlFlfWzq2JdnFov-1)
+
 ## 1. Deskripsi Sistem
 
 KoperasiKu merupakan rancangan sistem informasi administrasi koperasi simpan pinjam berbasis web. Sistem ini dirancang untuk membantu admin koperasi dalam mengelola data anggota, mencatat transaksi simpanan, pinjaman, dan angsuran, serta menyajikan informasi melalui dashboard dan laporan.
@@ -378,7 +382,3 @@ Link tersebut digunakan untuk melihat rancangan Design System dan High-Fidelity 
 
 Milestone 1 mencakup tahap perancangan antarmuka dan dokumentasi awal sistem. Implementasi HTML, CSS, dan JavaScript dilakukan pada tahap pengembangan berikutnya.
 
-
-## 14. Link Figma
-
-https://www.figma.com/design/NA6CmiWARcpyFTJdK8S0IZ/Pemograman-2?node-id=0-1&t=iIBnLhuqvVecCr02-1
