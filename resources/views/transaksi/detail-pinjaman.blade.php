@@ -6,7 +6,7 @@
 <!-- Header -->
 <div class="mb-6">
     <div class="flex items-center gap-2 text-sm text-secondary-text mb-2">
-        <a href="{{ route('simpanan.index') }}" class="hover:text-primary">Transaksi</a>
+        <a href="{{ route('finance.loans') }}" class="hover:text-primary">Pinjaman</a>
         <span class="material-symbols-outlined text-[16px]">chevron_right</span>
         <span class="text-main-text">Detail Pinjaman</span>
     </div>
@@ -19,48 +19,50 @@
     <div class="lg:col-span-2">
         <div class="bg-surface rounded-xl shadow-sm p-6 mb-6">
             <h2 class="text-xl font-semibold text-main-text mb-4">Informasi Pinjaman</h2>
-            
+
             <div class="grid grid-cols-2 gap-6">
                 <div>
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">ID Pinjaman</label>
                     <p class="mt-1 text-sm font-semibold text-main-text">{{ $pinjaman->id_pinjaman }}</p>
                 </div>
-                
+
                 <div>
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">Status</label>
                     <p class="mt-1">
                         <span class="px-2 py-1 rounded-full text-xs font-semibold {{ $pinjaman->status == 'Lunas' ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700' }}">
-                            {{ $pinjaman->status }}
+                            {{ ['submitted'=>'Menunggu persetujuan','approved'=>'Disetujui','disbursed'=>'Sedang berjalan','closed'=>'Lunas','rejected'=>'Ditolak','reversed'=>'Dibatalkan'][$pinjaman->workflow_status] ?? $pinjaman->status }}
                         </span>
                     </p>
                 </div>
-                
+
                 <div class="col-span-2">
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">Nama Anggota</label>
                     <p class="mt-1 text-sm font-semibold text-main-text">{{ $pinjaman->anggota->nama }}</p>
                 </div>
-                
+
                 <div>
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">Tanggal Pinjaman</label>
                     <p class="mt-1 text-sm text-main-text">{{ $pinjaman->tanggal->format('d F Y') }}</p>
                 </div>
-                
+
                 <div>
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">Tenor</label>
                     <p class="mt-1 text-sm text-main-text">{{ $pinjaman->tenor }} Bulan</p>
                 </div>
-                
+
                 <div>
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">Jumlah Pinjaman</label>
                     <p class="mt-1 text-sm font-bold text-main-text">Rp{{ number_format($pinjaman->jumlah_pinjaman, 0, ',', '.') }}</p>
                 </div>
-                
+
                 <div>
                     <label class="text-xs font-semibold text-secondary-text uppercase tracking-wider">Angsuran per Bulan</label>
                     <p class="mt-1 text-sm font-bold text-main-text">Rp{{ number_format($pinjaman->angsuran_per_bulan, 0, ',', '.') }}</p>
                 </div>
             </div>
-            
+
+                        <div class="mt-4 text-sm text-secondary-text">Proses: {{ $pinjaman->workflow_status }} · Bunga tersisa: Rp{{ number_format($pinjaman->sisa_jasa,2,',','.') }}
+            @if($pinjaman->policy_snapshot)<p>{{ $pinjaman->policy_snapshot['label'] }}</p>@else<p>Pinjaman lama: kebijakan historis dipertahankan.</p>@endif</div>
             <!-- Progress Bar -->
             <div class="mt-6 pt-6 border-t border-border">
                 <div class="flex items-center justify-between mb-2">
@@ -72,11 +74,11 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Riwayat Angsuran -->
         <div class="bg-surface rounded-xl shadow-sm p-6">
             <h2 class="text-xl font-semibold text-main-text mb-4">Riwayat Angsuran</h2>
-            
+
             @if($pinjaman->angsuran->count() > 0)
             <div class="overflow-x-auto">
                 <table class="w-full">
@@ -91,7 +93,7 @@
                     <tbody class="divide-y divide-border">
                         @foreach($pinjaman->angsuran as $angsuran)
                         <tr>
-                            <td class="px-4 py-2 text-sm text-main-text">{{ $angsuran->tanggal->format('d/m/Y') }}</td>
+                            <td class="px-4 py-2 text-sm text-main-text">{{ $angsuran->tanggal->format('d/m/Y') }} @if($angsuran->dibatalkan)<span class="text-danger block text-xs">Dibatalkan</span>@endif</td>
                             <td class="px-4 py-2 text-sm text-main-text text-center font-semibold">{{ $angsuran->angsuran_ke }}</td>
                             <td class="px-4 py-2 text-sm text-main-text text-right font-semibold">Rp{{ number_format($angsuran->jumlah_bayar, 0, ',', '.') }}</td>
                             <td class="px-4 py-2 text-sm text-main-text text-right font-semibold">Rp{{ number_format($angsuran->sisa_pinjaman, 0, ',', '.') }}</td>
@@ -105,12 +107,12 @@
             @endif
         </div>
     </div>
-    
+
     <!-- Summary Card -->
     <div class="lg:col-span-1">
         <div class="bg-surface rounded-xl shadow-sm p-6 sticky top-6">
             <h2 class="text-lg font-semibold text-main-text mb-4">Ringkasan</h2>
-            
+
             <div class="space-y-4">
                 <div class="p-4 bg-blue-50 rounded-lg">
                     <div class="flex items-center gap-2 mb-1">
@@ -119,7 +121,7 @@
                     </div>
                     <p class="text-2xl font-bold text-blue-700">Rp{{ number_format($pinjaman->jumlah_pinjaman, 0, ',', '.') }}</p>
                 </div>
-                
+
                 <div class="p-4 bg-green-50 rounded-lg">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="material-symbols-outlined text-green-700 text-[20px]">check_circle</span>
@@ -127,7 +129,7 @@
                     </div>
                     <p class="text-2xl font-bold text-green-700">Rp{{ number_format($totalDibayar, 0, ',', '.') }}</p>
                 </div>
-                
+
                 <div class="p-4 bg-orange-50 rounded-lg">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="material-symbols-outlined text-orange-700 text-[20px]">account_balance</span>
@@ -135,7 +137,7 @@
                     </div>
                     <p class="text-2xl font-bold text-orange-700">Rp{{ number_format($pinjaman->sisa_pinjaman, 0, ',', '.') }}</p>
                 </div>
-                
+
                 <div class="p-4 bg-purple-50 rounded-lg">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="material-symbols-outlined text-purple-700 text-[20px]">history</span>
@@ -144,10 +146,10 @@
                     <p class="text-2xl font-bold text-purple-700">{{ $pinjaman->angsuran->count() }}x</p>
                 </div>
             </div>
-            
-            @if($pinjaman->status == 'Berjalan')
+
+            @if($pinjaman->status === 'Berjalan' && in_array($pinjaman->workflow_status, ['disbursed','legacy']))
             <div class="mt-6 pt-6 border-t border-border">
-                <a href="{{ route('simpanan.index') }}#angsuran" class="w-full inline-flex items-center justify-center gap-2 px-4 h-10 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-all">
+                <a href="{{ route('angsuran.index', ['loan'=>$pinjaman->id_pinjaman]) }}" class="w-full inline-flex items-center justify-center gap-2 px-4 h-10 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-all">
                     <span class="material-symbols-outlined text-[18px]">add</span>
                     <span>Tambah Angsuran</span>
                 </a>

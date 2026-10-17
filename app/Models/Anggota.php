@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Anggota extends Model
 {
     protected $table = 'anggota';
+
     protected $primaryKey = 'id_anggota';
-    
+
     protected $fillable = [
         'nama',
         'nik',
@@ -16,7 +17,7 @@ class Anggota extends Model
         'jenis_kelamin',
         'alamat',
         'tanggal_bergabung',
-        'status'
+        'status',
     ];
 
     protected $casts = [

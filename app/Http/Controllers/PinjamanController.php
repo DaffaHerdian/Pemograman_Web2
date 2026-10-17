@@ -2,61 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Pinjaman;
+use App\Http\Requests\FinancialRequest;
 use App\Models\Anggota;
+use App\Models\Pinjaman;
+use App\Services\Finance;
+use Brick\Math\BigDecimal;
+use Illuminate\Support\Facades\DB;
 
 class PinjamanController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $query = Pinjaman::with('anggota');
-        
-        // Filter by status
-        if ($request->has('status') && $request->status != '') {
-            $query->where('status', $request->status);
-        }
-        
-        // Filter by date range
-        if ($request->has('tanggal_dari') && $request->tanggal_dari != '') {
-            $query->whereDate('tanggal', '>=', $request->tanggal_dari);
-        }
-        
-        if ($request->has('tanggal_sampai') && $request->tanggal_sampai != '') {
-            $query->whereDate('tanggal', '<=', $request->tanggal_sampai);
-        }
-        
-        $pinjaman = $query->latest('tanggal')->paginate(15);
-        
-        return view('transaksi.pinjaman', compact('pinjaman'));
+        return redirect()->route('finance.loans');
     }
 
-    public function store(Request $request)
+    public function create(Finance $finance)
     {
-        $validated = $request->validate([
-            'id_anggota' => 'required|exists:anggota,id_anggota',
-            'tanggal' => 'required|date',
-            'jumlah_pinjaman' => 'required|numeric|min:0.01|max:10000000',
-            'tenor' => 'required|integer|min:1',
-            'angsuran_per_bulan' => 'required|numeric|min:0.01',
-        ]);
+        return view('finance.loan-create', ['members' => Anggota::where('status', 'Aktif')->orderBy('nama')->get(), 'rules' => $finance->rules()]);
+    }
 
-        // Set initial values
-        $validated['sisa_pinjaman'] = $validated['jumlah_pinjaman'];
-        $validated['status'] = 'Berjalan';
+    public function store(FinancialRequest $request, Finance $finance)
+    {
+        $finance->apply($request->validated(), $request->user()->id);
 
-        Pinjaman::create($validated);
-
-        return redirect()->back()
-            ->with('success', 'Pinjaman berhasil ditambahkan.');
+        return redirect()->route('finance.loans')->with('success', 'Pengajuan tersimpan. Tinjau dan setujui sebelum pencairan.');
     }
 
     public function show($id)
     {
         $pinjaman = Pinjaman::with(['anggota', 'angsuran'])->findOrFail($id);
-        
-        $totalDibayar = $pinjaman->angsuran->sum('jumlah_bayar');
-        
+        $reversed = DB::table('financial_transactions')->whereNotNull('reversal_of')->pluck('reversal_of');
+        $total = BigDecimal::of(0);
+        foreach ($pinjaman->angsuran as $payment) {
+            $payment->setAttribute('dibatalkan', $payment->transaction_id && $reversed->contains($payment->transaction_id));
+            if (! $payment->dibatalkan) {
+                $total = $total->plus($payment->jumlah_bayar);
+            }
+        }
+        $totalDibayar = (string) $total;
+
         return view('transaksi.detail-pinjaman', compact('pinjaman', 'totalDibayar'));
     }
 }

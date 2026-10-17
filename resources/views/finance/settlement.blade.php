@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('content')
+<h1 class="text-3xl font-bold mb-6">Quotation Pelunasan #{{ $loan }}</h1>
+<div class="bg-surface p-6 rounded-xl space-y-4 max-w-xl"><p>{{ $quote['policy']['label'] }}</p><p>Pokok tersisa: Rp{{ number_format($quote['principal'],2,',','.') }}</p><p>Bunga kontrak tersisa: Rp{{ number_format($quote['interest'],2,',','.') }}</p><p class="text-2xl font-bold text-primary">Total Rp{{ number_format($quote['total'],2,',','.') }}</p><p class="text-sm text-secondary-text">Tanpa denda atau biaya admin. Bunga kontrak tidak dihapus saat pelunasan awal. Jumlah diperiksa ulang saat posting.</p>
+<form method="POST" action="{{ route('finance.settle') }}" class="space-y-4">@include('finance.key')<input type="hidden" name="id_pinjaman" value="{{ $loan }}"><input type="hidden" name="jumlah_bayar" value="{{ $quote['total'] }}"><label class="block">Tanggal <input type="date" class="border rounded p-2" name="tanggal" value="{{ now('Asia/Jakarta')->toDateString() }}" required></label><label class="block"><input type="checkbox" name="confirm" value="1" required> Dana pelunasan sudah diterima dan rincian sudah saya periksa.</label><button class="bg-primary text-white rounded px-4 py-2">Konfirmasi pelunasan</button></form></div>
+@endsection

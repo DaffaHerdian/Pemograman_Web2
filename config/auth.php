@@ -112,6 +112,8 @@ return [
     |
     */
 
+    'local_admin_password' => env('LOCAL_ADMIN_PASSWORD'),
+
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
 ];

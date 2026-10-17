@@ -19,47 +19,47 @@
     <form method="POST" action="{{ route('anggota.update', $anggota->id_anggota) }}">
         @csrf
         @method('PUT')
-        
+
         <div class="space-y-6">
             <!-- Nama -->
             <div>
                 <label for="nama" class="block text-sm font-semibold text-main-text mb-2">
                     Nama Lengkap <span class="text-danger">*</span>
                 </label>
-                <input type="text" id="nama" name="nama" value="{{ old('nama', $anggota->nama) }}" required
+                <input type="text" id="nama" name="nama" data-input-kind="person-name" pattern="\p{L}[\p{L}\p{M} .'’\-]*" maxlength="255" title="Nama tidak boleh berisi angka; gunakan huruf, spasi, titik, apostrof, atau tanda hubung." value="{{ old('nama', $anggota->nama) }}" required
                        class="w-full h-11 px-4 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all @error('nama') ring-2 ring-danger @enderror"
                        placeholder="Masukkan nama lengkap">
                 @error('nama')
                 <p class="mt-1 text-xs text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            
+
             <!-- NIK -->
             <div>
                 <label for="nik" class="block text-sm font-semibold text-main-text mb-2">
                     NIK (Nomor Induk Kependudukan) <span class="text-danger">*</span>
                 </label>
-                <input type="text" id="nik" name="nik" value="{{ old('nik', $anggota->nik) }}" required maxlength="16"
+                <input type="text" id="nik" name="nik" value="{{ old('nik', $anggota->nik) }}" required minlength="16" maxlength="16" inputmode="numeric" pattern="[0-9]{16}" data-input-kind="digits" title="NIK harus terdiri dari tepat 16 digit angka."
                        class="w-full h-11 px-4 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all @error('nik') ring-2 ring-danger @enderror"
                        placeholder="Masukkan 16 digit NIK">
                 @error('nik')
                 <p class="mt-1 text-xs text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            
+
             <!-- Telepon -->
             <div>
                 <label for="telepon" class="block text-sm font-semibold text-main-text mb-2">
                     Nomor Telepon <span class="text-danger">*</span>
                 </label>
-                <input type="text" id="telepon" name="telepon" value="{{ old('telepon', $anggota->telepon) }}" required
+                <input type="tel" id="telepon" name="telepon" inputmode="numeric" maxlength="15" pattern="[0-9]{1,15}" data-input-kind="digits" title="Nomor telepon hanya angka, maksimal 15 digit, tanpa spasi atau tanda tambah." value="{{ old('telepon', $anggota->telepon) }}" required
                        class="w-full h-11 px-4 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all @error('telepon') ring-2 ring-danger @enderror"
                        placeholder="08xxxxxxxxxx">
                 @error('telepon')
                 <p class="mt-1 text-xs text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            
+
             <!-- Jenis Kelamin -->
             <div>
                 <label for="jenis_kelamin" class="block text-sm font-semibold text-main-text mb-2">
@@ -75,7 +75,7 @@
                 <p class="mt-1 text-xs text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            
+
             <!-- Alamat -->
             <div>
                 <label for="alamat" class="block text-sm font-semibold text-main-text mb-2">
@@ -88,7 +88,7 @@
                 <p class="mt-1 text-xs text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            
+
             <!-- Tanggal Bergabung -->
             <div>
                 <label for="tanggal_bergabung" class="block text-sm font-semibold text-main-text mb-2">
@@ -100,7 +100,7 @@
                 <p class="mt-1 text-xs text-danger">{{ $message }}</p>
                 @enderror
             </div>
-            
+
             <!-- Status -->
             <div>
                 <label for="status" class="block text-sm font-semibold text-main-text mb-2">
@@ -116,7 +116,7 @@
                 @enderror
             </div>
         </div>
-        
+
         <!-- Actions -->
         <div class="flex items-center gap-3 mt-8 pt-6 border-t border-border">
             <button type="submit" class="px-6 h-11 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all shadow-sm">

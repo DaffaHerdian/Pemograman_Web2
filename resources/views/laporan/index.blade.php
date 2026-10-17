@@ -11,14 +11,14 @@
             <p class="text-sm text-secondary-text mt-1">Laporan dan analisis data koperasi</p>
         </div>
         <div class="flex gap-2">
-            <a href="{{ route('laporan.print', ['jenis' => $jenis] + request()->all()) }}" target="_blank" 
+            <a href="{{ route('laporan.print', ['jenis' => $jenis] + request()->all()) }}" target="_blank"
                class="inline-flex items-center gap-2 px-4 h-10 rounded-lg bg-info text-white text-sm font-semibold hover:bg-info/90 transition-all">
                 <span class="material-symbols-outlined text-[18px]">print</span>
                 <span>Cetak</span>
             </a>
         </div>
     </div>
-    
+
     <!-- Filter -->
     <div class="bg-surface rounded-xl shadow-sm p-6 mb-6">
         <form method="GET" action="{{ route('laporan.index') }}" class="space-y-4">
@@ -32,8 +32,8 @@
                         <option value="angsuran">Angsuran</option>
                     </select>
                 </div>
-                
-                <div x-show="jenis === 'anggota'">
+
+                <div x-cloak x-show="jenis === 'anggota'">
                     <label class="block text-sm font-semibold text-main-text mb-2">Status</label>
                     <select name="status" class="w-full h-10 px-3 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40">
                         <option value="">Semua</option>
@@ -41,18 +41,18 @@
                         <option value="Tidak Aktif" {{ request('status') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif</option>
                     </select>
                 </div>
-                
-                <div x-show="jenis === 'simpanan' || jenis === 'pinjaman' || jenis === 'angsuran'">
+
+                <div x-cloak x-show="jenis === 'simpanan' || jenis === 'pinjaman' || jenis === 'angsuran'">
                     <label class="block text-sm font-semibold text-main-text mb-2">Tanggal Dari</label>
                     <input type="date" name="tanggal_dari" value="{{ request('tanggal_dari') }}" class="w-full h-10 px-3 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40">
                 </div>
-                
-                <div x-show="jenis === 'simpanan' || jenis === 'pinjaman' || jenis === 'angsuran'">
+
+                <div x-cloak x-show="jenis === 'simpanan' || jenis === 'pinjaman' || jenis === 'angsuran'">
                     <label class="block text-sm font-semibold text-main-text mb-2">Tanggal Sampai</label>
                     <input type="date" name="tanggal_sampai" value="{{ request('tanggal_sampai') }}" class="w-full h-10 px-3 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40">
                 </div>
-                
-                <div x-show="jenis === 'simpanan'">
+
+                <div x-cloak x-show="jenis === 'simpanan'">
                     <label class="block text-sm font-semibold text-main-text mb-2">Jenis Simpanan</label>
                     <select name="jenis_simpanan" class="w-full h-10 px-3 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40">
                         <option value="">Semua</option>
@@ -61,8 +61,8 @@
                         <option value="Sukarela" {{ request('jenis_simpanan') == 'Sukarela' ? 'selected' : '' }}>Sukarela</option>
                     </select>
                 </div>
-                
-                <div x-show="jenis === 'pinjaman'">
+
+                <div x-cloak x-show="jenis === 'pinjaman'">
                     <label class="block text-sm font-semibold text-main-text mb-2">Status</label>
                     <select name="status" class="w-full h-10 px-3 bg-background rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/40">
                         <option value="">Semua</option>
@@ -71,7 +71,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="flex gap-2">
                 <button type="submit" class="px-6 h-10 bg-primary text-white rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all">
                     Tampilkan Laporan
@@ -82,7 +82,7 @@
             </div>
         </form>
     </div>
-    
+
     <!-- Data Laporan -->
     <div class="bg-surface rounded-xl shadow-sm overflow-hidden">
         @if($jenis == 'anggota')
@@ -132,15 +132,15 @@
                         <tr>
                             <td class="px-6 py-4 text-sm text-main-text">{{ $item->tanggal->format('d/m/Y') }}</td>
                             <td class="px-6 py-4 text-sm text-main-text">{{ $item->anggota->nama }}</td>
-                            <td class="px-6 py-4 text-sm text-secondary-text">{{ $item->jenis_simpanan }}</td>
-                            <td class="px-6 py-4 text-sm text-main-text text-right font-semibold">Rp{{ number_format($item->jumlah, 0, ',', '.') }}</td>
+                            <td class="px-6 py-4 text-sm text-secondary-text">{{ $item->jenis_simpanan }} · {{ $item->jenis_transaksi }}</td>
+                            <td class="px-6 py-4 text-sm text-main-text text-right font-semibold">{{ $item->jumlah < 0 ? '−' : '+' }}Rp{{ number_format(abs($item->jumlah), 2, ',', '.') }}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot class="bg-background border-t border-border">
                         <tr>
-                            <td colspan="3" class="px-6 py-4 text-sm font-semibold text-main-text text-right">Total:</td>
-                            <td class="px-6 py-4 text-sm font-bold text-main-text text-right">Rp{{ number_format($data->sum('jumlah'), 0, ',', '.') }}</td>
+                            <td colspan="3" class="px-6 py-4 text-sm font-semibold text-main-text text-right">Setoran − Penarikan (Sesuai Filter):</td>
+                            <td class="px-6 py-4 text-sm font-bold text-main-text text-right">Rp{{ number_format($data->sum('jumlah'), 2, ',', '.') }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -215,7 +215,7 @@
                 </table>
             </div>
         @endif
-        
+
         @if($data->count() == 0)
         <div class="text-center py-12">
             <span class="material-symbols-outlined text-[48px] text-secondary-text">description</span>

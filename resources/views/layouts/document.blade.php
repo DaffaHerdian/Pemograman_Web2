@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>@yield('document-title')</title>
+<style>
+@page { size:A4 {{ $orientation ?? 'portrait' }}; margin:16mm 14mm 18mm; }
+* { box-sizing:border-box; }
+body { margin:0; color:#243747; font-family:DejaVu Sans,sans-serif; font-size:10px; line-height:1.5; }
+h1,h2,h3,p { margin:0; } table { border-collapse:collapse; width:100%; } td,th { vertical-align:top; }
+.brand { border-bottom:3px solid #0f766e; margin-bottom:24px; }.brand td { padding:0 0 16px; }.brand .logo { width:66px; }.logo img { width:48px; height:48px; }
+.brand-name { font-size:20px; line-height:1.3; font-weight:bold; color:#134e4a; }.brand-contact { font-size:9px; color:#64748b; margin-top:5px; }.brand-right { width:135px; text-align:right; color:#64748b; font-size:8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:1.5px; font-size:8px; font-weight:bold; color:#0f766e; margin-bottom:5px; }
+h1 { font-size:22px; line-height:1.3; color:#172f3d; margin-bottom:8px; }.subtitle { color:#64748b; font-size:10px; margin-bottom:20px; }
+.meta { background:#f3f7f8; border:1px solid #e2e8ee; margin-bottom:22px; }.meta td { padding:12px 14px; }.meta-label { color:#64748b; text-transform:uppercase; letter-spacing:.6px; font-size:7px; margin-bottom:4px; }.meta-value { font-size:10px; font-weight:bold; }
+.data { table-layout:fixed; font-size:8px; }.data thead { display:table-header-group; }.data th { background:#0f766e; color:#fff; font-size:7px; line-height:1.5; padding:10px 7px; font-weight:bold; text-align:left; border-right:1px solid #26877f; }.data td { padding:8px 7px; border-bottom:1px solid #e2e8ee; overflow-wrap:break-word; word-wrap:break-word; }.data tr.alternate td { background:#f5f8fa; }.data tr { page-break-inside:avoid; }.data .number { width:30px; text-align:center; color:#64748b; }.data th.number { color:white; }.money { text-align:right !important; white-space:nowrap; }.data .money { width:82px; }.data .date { width:64px; }.data .identifier { width:46px; }.data .person { width:110px; }
+.summary { margin-top:18px; border-top:2px solid #0f766e; background:#f0f8f6; page-break-inside:avoid; }.summary td { padding:13px 14px; }.summary-label { color:#49615c; font-size:9px; }.summary-amount { font-size:16px; font-weight:bold; color:#0f766e; text-align:right; }
+.note { font-size:8px; color:#64748b; line-height:1.65; margin-top:14px; }.empty { padding:30px !important; text-align:center; color:#64748b; }.signatures { margin-top:22px; page-break-inside:avoid; }.signatures td { width:50%; text-align:center; font-size:9px; }.signature-space { height:36px; }.signature-name { font-weight:bold; }.signature-caption { color:#64748b; font-size:8px; }
+.detail td { padding:10px 0; border-bottom:1px solid #e2e8ee; font-size:10px; }.detail .key { width:35%; color:#64748b; }.detail .value { font-weight:bold; }.receipt-amount { margin:22px 0; padding:18px; background:#f0f8f6; border-left:4px solid #0f766e; }.receipt-amount strong { font-size:26px; color:#0f766e; }.cancelled { color:#b91c1c; background:#fef2f2; border:1px solid #fecaca; padding:12px; font-weight:bold; margin-bottom:18px; }.verification { margin-top:22px; page-break-inside:avoid; }.verification td { padding-right:16px; }.verification img { width:96px; height:96px; }.verification .qr { width:112px; }.verification a { color:#0f766e; word-break:break-all; }
+.document-footer { margin-top:20px; padding-top:10px; border-top:1px solid #dbe4e9; color:#64748b; font-size:8px; }.document-footer td:last-child { text-align:right; }
+.landscape .brand { margin-bottom:16px; }.landscape .brand td { padding-bottom:12px; }.landscape .subtitle { margin-bottom:12px; }.landscape .meta { margin-bottom:16px; }.landscape .meta td { padding:8px 12px; }.landscape .data th { padding:7px; }.landscape .data td { padding:4px 7px; }.landscape .summary td { padding:9px 14px; }.landscape .signatures { margin-top:14px; }.landscape .signature-space { height:28px; }
+.toolbar { display:none; }
+@media screen { body { background:#edf2f5; padding:32px 18px; }.paper { background:white; max-width:{{ ($orientation ?? 'portrait') === 'landscape' ? '1120px' : '820px' }}; margin:0 auto; padding:48px; box-shadow:0 8px 35px #102c3a12; border-radius:6px; }.toolbar { display:block; max-width:{{ ($orientation ?? 'portrait') === 'landscape' ? '1120px' : '820px' }}; margin:0 auto 18px; font-family:Arial,sans-serif; }.toolbar a,.toolbar button { display:inline-block; text-decoration:none; padding:11px 16px; font-size:13px; border-radius:7px; cursor:pointer; border:1px solid #d5e0e6; background:white; color:#264153; margin-right:8px; }.toolbar button { background:#0f766e; color:white; border-color:#0f766e; } }
+@media print { body { padding:0; background:white; }.paper { padding:0; box-shadow:none; border-radius:0; }.toolbar { display:none; } }
+@media screen and (max-width:650px) { .paper { padding:24px 18px; overflow-x:auto; }.data { min-width:640px; } }
+</style></head><body class="{{ $orientation ?? 'portrait' }}">
+@if(!($isPdf ?? false))<div class="toolbar">@yield('document-actions')</div>@endif
+<div class="paper">
+<table class="brand"><tr>@if($identity->logo_data)<td class="logo"><img src="{{ $identity->logo_data }}" alt="Logo"></td>@endif<td><div class="brand-name">{{ $identity->name }}</div><p class="brand-contact">{{ $identity->address }}@if($identity->telephone)<br>Telp. {{ $identity->telephone }}@endif</p></td><td class="brand-right">KOPERASI SIMPAN PINJAM<br>Dokumen administrasi</td></tr></table>
+@yield('document-content')
+<table class="document-footer"><tr><td>{{ $identity->name }} &middot; @yield('document-title')</td><td>Diterbitkan {{ now('Asia/Jakarta')->format('d/m/Y H:i') }} WIB</td></tr></table>
+</div></body></html>

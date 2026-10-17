@@ -7,20 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Angsuran extends Model
 {
     protected $table = 'angsuran';
+
     protected $primaryKey = 'id_angsuran';
-    
+
     protected $fillable = [
         'id_pinjaman',
         'tanggal',
         'angsuran_ke',
         'jumlah_bayar',
-        'sisa_pinjaman'
+        'sisa_pinjaman',
     ];
 
     protected $casts = [
         'tanggal' => 'date',
         'jumlah_bayar' => 'decimal:2',
-        'sisa_pinjaman' => 'decimal:2',
+        'sisa_pinjaman' => 'decimal:2', 'jasa_bayar' => 'decimal:2', 'sisa_jasa' => 'decimal:2',
     ];
 
     // Relationships

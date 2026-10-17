@@ -11,17 +11,17 @@
                 size: A4;
                 margin: 1cm;
             }
-            
+
             body {
                 print-color-adjust: exact;
                 -webkit-print-color-adjust: exact;
             }
-            
+
             .no-print {
                 display: none !important;
             }
         }
-        
+
         body {
             font-family: 'Arial', sans-serif;
         }
@@ -35,11 +35,11 @@
             <p class="text-sm text-gray-600">Sistem Informasi Koperasi Simpan Pinjam</p>
             <p class="text-xs text-gray-500 mt-2">Jl. Contoh No. 123, Jakarta | Telp: (021) 1234567</p>
         </div>
-        
+
         <!-- Judul Laporan -->
         <div class="mb-6">
             <h2 class="text-xl font-bold text-gray-900 text-center mb-2">
-                LAPORAN 
+                LAPORAN
                 @if($jenis == 'anggota')
                     DATA ANGGOTA
                 @elseif($jenis == 'simpanan')
@@ -52,7 +52,7 @@
             </h2>
             <p class="text-sm text-gray-600 text-center">Dicetak pada: {{ now()->format('d F Y H:i') }}</p>
         </div>
-        
+
         <!-- Data Laporan -->
         @if($jenis == 'anggota')
             <table class="w-full text-sm border-collapse border border-gray-300">
@@ -79,7 +79,7 @@
                     @endforeach
                 </tbody>
             </table>
-            
+
         @elseif($jenis == 'simpanan')
             <table class="w-full text-sm border-collapse border border-gray-300">
                 <thead>
@@ -95,17 +95,17 @@
                     <tr>
                         <td class="border border-gray-300 px-3 py-2">{{ $item->tanggal->format('d/m/Y') }}</td>
                         <td class="border border-gray-300 px-3 py-2">{{ $item->anggota->nama }}</td>
-                        <td class="border border-gray-300 px-3 py-2">{{ $item->jenis_simpanan }}</td>
-                        <td class="border border-gray-300 px-3 py-2 text-right">Rp{{ number_format($item->jumlah, 0, ',', '.') }}</td>
+                        <td class="border border-gray-300 px-3 py-2">{{ $item->jenis_simpanan }} · {{ $item->jenis_transaksi }}</td>
+                        <td class="border border-gray-300 px-3 py-2 text-right">{{ $item->jumlah < 0 ? '−' : '+' }}Rp{{ number_format(abs($item->jumlah), 2, ',', '.') }}</td>
                     </tr>
                     @endforeach
                     <tr class="bg-gray-100 font-bold">
-                        <td colspan="3" class="border border-gray-300 px-3 py-2 text-right">TOTAL:</td>
-                        <td class="border border-gray-300 px-3 py-2 text-right">Rp{{ number_format($data->sum('jumlah'), 0, ',', '.') }}</td>
+                        <td colspan="3" class="border border-gray-300 px-3 py-2 text-right">SETORAN − PENARIKAN:</td>
+                        <td class="border border-gray-300 px-3 py-2 text-right">Rp{{ number_format($data->sum('jumlah'), 2, ',', '.') }}</td>
                     </tr>
                 </tbody>
             </table>
-            
+
         @elseif($jenis == 'pinjaman')
             <table class="w-full text-sm border-collapse border border-gray-300">
                 <thead>
@@ -135,7 +135,7 @@
                     </tr>
                 </tbody>
             </table>
-            
+
         @elseif($jenis == 'angsuran')
             <table class="w-full text-sm border-collapse border border-gray-300">
                 <thead>
@@ -165,7 +165,7 @@
                 </tbody>
             </table>
         @endif
-        
+
         <!-- Footer -->
         <div class="mt-8 pt-4 border-t border-gray-300">
             <div class="flex justify-between items-start">
@@ -179,7 +179,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Print Button -->
         <div class="no-print mt-6 text-center">
             <button onclick="window.print()" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all">

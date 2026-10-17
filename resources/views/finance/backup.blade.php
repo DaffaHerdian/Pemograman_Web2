@@ -1,0 +1,6 @@
+@extends('layouts.app')
+@section('content')
+<h1 class="text-3xl font-bold mb-6">Backup Database</h1><div class="bg-surface rounded-xl p-6 max-w-xl space-y-4"><p>SQL berisi data koperasi dan hash akun. Simpan di tempat privat. Unduhan memerlukan autentikasi ulang, dibatasi 50 MB/120 detik dan dua permintaan per jam. File sementara dihapus sesudah dikirim.</p>
+@if($available)<form method="POST" action="{{ route('backup.download') }}" class="space-y-4">@csrf<label class="block">Password admin saat ini<input name="password" type="password" required autocomplete="current-password" class="block border rounded p-2 w-full"></label><label class="block"><input name="confirm" value="1" type="checkbox" required> Saya akan menyimpan backup ini secara privat.</label><button class="bg-primary text-white rounded px-4 py-2">Buat dan unduh backup</button></form>
+@else<p class="text-warning font-semibold">Fitur terbatas: dump aman tidak didukung konfigurasi server ini.</p><ol class="list-decimal pl-6 space-y-2"><li>Buka phpMyAdmin dari panel hosting sendiri.</li><li>Pilih database koperasi, lalu Export.</li><li>Pilih format SQL, struktur dan data, simpan hasil ke lokasi privat.</li><li>Verifikasi file dan uji pemulihan pada database pengujian sebelum perubahan schema.</li></ol>@endif</div>
+@endsection

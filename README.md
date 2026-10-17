@@ -1,312 +1,46 @@
-# KoperasiKu - Sistem Informasi Koperasi Simpan Pinjam
+# KoperasiKu
 
-![KoperasiKu](https://img.shields.io/badge/Laravel-v13-red)
-![PHP](https://img.shields.io/badge/PHP-8.4-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+Aplikasi lokal administrasi koperasi simpan pinjam berbasis Laravel 13: anggota, simpanan, pengajuan dan pencairan pinjaman, angsuran, jatuh tempo, buku kas, serta laporan cetak/PDF/Excel.
 
-Sistem informasi berbasis web untuk mengelola administrasi koperasi simpan pinjam. Dibangun dengan Laravel, Tailwind CSS, dan Alpine.js.
+## Menjalankan di lokal
 
-## 🎯 Fitur Utama
+Gunakan PHP 8.4.1 atau lebih baru sesuai composer.lock, Composer, MySQL, serta ekstensi PHP yang diminta Composer (termasuk pdo_mysql, pdo_sqlite, mbstring, intl, zip, dan gd).
 
-### 1. **Manajemen Anggota**
-- ✅ CRUD data anggota lengkap
-- ✅ Pencarian dan filter anggota
-- ✅ Detail profil anggota dengan ringkasan keuangan
-- ✅ Status anggota (Aktif/Tidak Aktif)
-
-### 2. **Transaksi Simpanan**
-- ✅ Pencatatan simpanan (Pokok, Wajib, Sukarela)
-- ✅ Riwayat simpanan per anggota
-- ✅ Total simpanan real-time
-
-### 3. **Transaksi Pinjaman**
-- ✅ Pencatatan pinjaman dengan validasi batas maksimal (Rp 10.000.000)
-- ✅ Perhitungan tenor dan angsuran
-- ✅ Status pinjaman (Berjalan/Lunas)
-- ✅ Detail pinjaman dengan progress pembayaran
-
-### 4. **Transaksi Angsuran**
-- ✅ Pencatatan pembayaran angsuran
-- ✅ Auto-update sisa pinjaman
-- ✅ Auto-update status menjadi "Lunas" ketika sisa = 0
-- ✅ Database transaction untuk konsistensi data
-- ✅ Validasi pembayaran tidak boleh melebihi sisa
-
-### 5. **Dashboard**
-- ✅ Statistik real-time (Total Anggota, Simpanan, Pinjaman, Angsuran)
-- ✅ Distribusi status pinjaman
-- ✅ Transaksi terbaru
-- ✅ Quick actions
-
-### 6. **Laporan**
-- ✅ Laporan Data Anggota
-- ✅ Laporan Simpanan
-- ✅ Laporan Pinjaman
-- ✅ Laporan Angsuran
-- ✅ Filter berdasarkan tanggal, jenis, dan status
-- ✅ Cetak laporan (Print-ready A4)
-
-## 🚀 Teknologi
-
-- **Backend:** Laravel 13.x
-- **Frontend:** Blade Templates, Tailwind CSS 3.x, Alpine.js 3.x
-- **Database:** MySQL / SQLite
-- **Icons:** Material Symbols
-- **Fonts:** Inter
-
-## 📋 Persyaratan Sistem
-
-- PHP >= 8.2
-- Composer
-- Node.js & npm
-- MySQL 8.0+ atau SQLite
-- Git
-
-## 🛠️ Instalasi
-
-### 1. Clone Repository
-```bash
-git clone <repository-url>
-cd koperasiku
-```
-
-### 2. Install Dependencies
-```bash
+~~~powershell
 composer install
-npm install
-```
-
-### 3. Setup Environment
-```bash
-cp .env.example .env
+Copy-Item .env.example .env
 php artisan key:generate
-```
+~~~
 
-### 4. Konfigurasi Database
-Edit file `.env`:
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=koperasiku
-DB_USERNAME=root
-DB_PASSWORD=
-```
+Buat database MySQL kosong bernama koperasiku. Sesuaikan DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, dan DB_PASSWORD di .env, lalu isi LOCAL_ADMIN_PASSWORD dengan password admin pilihan sendiri (minimal 8 karakter).
 
-Atau gunakan SQLite:
-```env
-DB_CONNECTION=sqlite
-```
+~~~powershell
+php artisan migrate
+php artisan db:seed --class=UserSeeder
+php artisan serve --host=127.0.0.1 --port=8001 --tries=1
+~~~
 
-### 5. Jalankan Migrations & Seeders
-```bash
-php artisan migrate:fresh --seed
-```
+Buka http://127.0.0.1:8001. Email admin: admin@koperasiku.id. Password mengikuti LOCAL_ADMIN_PASSWORD saat seeder dijalankan. Jangan menjalankan seeder berulang pada database yang sudah memiliki akun tersebut.
 
-### 6. Jalankan Development Server
-```bash
-php artisan serve
-```
+Aset hasil build sudah disertakan. Untuk mengubah CSS/JavaScript lewat Vite, gunakan Node.js, lalu jalankan npm ci dan npm run build.
 
-Aplikasi dapat diakses di: `http://localhost:8000`
+## Alur penggunaan
 
-## 👤 Login Default
+1. Isi identitas dan aturan koperasi pada pengaturan.
+2. Verifikasi saldo pembukaan yang benar di Buku Kas.
+3. Daftarkan anggota, lalu catat setoran di Simpanan.
+4. Buat pengajuan di Pinjaman, setujui, lalu cairkan jika kas mencukupi.
+5. Catat pembayaran di Angsuran. Pembayaran sebagian tetap diperbolehkan.
+6. Periksa jatuh tempo, buku kas, serta laporan simpanan, pinjaman, dan angsuran.
 
-Setelah menjalankan seeder, gunakan kredensial berikut:
+Lihat FLOW_GUIDE.md untuk panduan lebih lanjut dan BUSINESS_RULES_REVIEW.md untuk aturan demo. Untuk data fiktif pada SQLite terpisah, tersedia php artisan koperasi:demo; perintah tersebut tidak mengisi database utama. Akun latihan menggunakan password publik demo-training-only.
 
-- **Email:** admin@koperasiku.id
-- **Password:** admin123
+## Pengujian
 
-## 📊 Struktur Database
+~~~powershell
+php vendor/phpunit/phpunit/phpunit
+~~~
 
-### Tabel Utama
+Pengujian memakai SQLite :memory:, bukan database MySQL utama.
 
-#### `users`
-- Authentication admin
-
-#### `anggota`
-- id_anggota (PK)
-- nama
-- nik (unique)
-- telepon
-- jenis_kelamin
-- alamat
-- tanggal_bergabung
-- status
-
-#### `simpanan`
-- id_simpanan (PK)
-- id_anggota (FK → anggota)
-- tanggal
-- jenis_simpanan (Pokok/Wajib/Sukarela)
-- jumlah
-
-#### `pinjaman`
-- id_pinjaman (PK)
-- id_anggota (FK → anggota)
-- tanggal
-- jumlah_pinjaman
-- tenor
-- angsuran_per_bulan
-- sisa_pinjaman
-- status (Berjalan/Lunas)
-
-#### `angsuran`
-- id_angsuran (PK)
-- id_pinjaman (FK → pinjaman)
-- tanggal
-- angsuran_ke
-- jumlah_bayar
-- sisa_pinjaman
-
-### Relationship
-```
-Anggota → hasMany → Simpanan
-Anggota → hasMany → Pinjaman
-Pinjaman → hasMany → Angsuran
-```
-
-## 🎨 Design System
-
-### Color Palette
-- **Primary:** `#0F766E` (Teal)
-- **Primary Light:** `#CCFBF1`
-- **Secondary:** `#14B8A6`
-- **Success:** `#16A34A`
-- **Warning:** `#F59E0B`
-- **Danger:** `#DC2626`
-- **Info:** `#2563EB`
-
-### Typography
-- **Font:** Inter
-- **H1:** 32px Bold
-- **H2:** 24px Semibold
-- **Body:** 14px Regular
-
-## 📱 Fitur UI/UX
-
-- ✅ Responsive design (Mobile, Tablet, Desktop)
-- ✅ Modern & Clean interface
-- ✅ Interactive modals dengan Alpine.js
-- ✅ Success/Error toast notifications
-- ✅ Empty states untuk data kosong
-- ✅ Loading states
-- ✅ Confirmation dialogs
-- ✅ Print-ready reports
-
-## 🔒 Keamanan
-
-- ✅ Password hashing dengan bcrypt
-- ✅ CSRF Protection
-- ✅ SQL Injection prevention (Eloquent ORM)
-- ✅ Mass assignment protection
-- ✅ XSS prevention (Blade escaping)
-- ✅ Authentication middleware
-- ✅ Form validation
-
-## 📖 Business Rules
-
-### Pinjaman
-- Maksimal pinjaman: **Rp 10.000.000**
-- Status otomatis berubah menjadi "Lunas" ketika sisa pinjaman = 0
-- Pinjaman yang sudah lunas tidak dapat menerima angsuran baru
-
-### Angsuran
-- Jumlah pembayaran harus > 0
-- Jumlah pembayaran tidak boleh melebihi sisa pinjaman
-- Nomor angsuran otomatis increment
-- Sisa pinjaman otomatis ter-update
-- Menggunakan database transaction untuk konsistensi
-
-### Anggota
-- Anggota dengan transaksi tidak dapat dihapus (soft delete dengan status)
-- NIK harus unique
-- Status: Aktif / Tidak Aktif
-
-## 🧪 Testing
-
-```bash
-# Jalankan tests
-php artisan test
-
-# Dengan coverage
-php artisan test --coverage
-```
-
-## 📦 Deployment
-
-### Production Checklist
-- [ ] Set `APP_ENV=production` di `.env`
-- [ ] Set `APP_DEBUG=false`
-- [ ] Setup SSL/HTTPS
-- [ ] Configure proper database credentials
-- [ ] Run `composer install --optimize-autoloader --no-dev`
-- [ ] Run `php artisan config:cache`
-- [ ] Run `php artisan route:cache`
-- [ ] Run `php artisan view:cache`
-- [ ] Setup proper file permissions
-- [ ] Configure backup strategy
-
-## 📝 Dokumentasi Tambahan
-
-Lihat folder `/docs` untuk dokumentasi lengkap:
-- `PERANCANGAN.md` - Perancangan sistem dan ERD
-- `IMPLEMENTASI.md` - Panduan implementasi lengkap
-
-## 👨‍💻 Development
-
-### Struktur Folder
-```
-koperasiku/
-├── app/
-│   ├── Http/Controllers/
-│   │   ├── AuthController.php
-│   │   ├── DashboardController.php
-│   │   ├── AnggotaController.php
-│   │   ├── SimpananController.php
-│   │   ├── PinjamanController.php
-│   │   ├── AngsuranController.php
-│   │   └── LaporanController.php
-│   └── Models/
-│       ├── User.php
-│       ├── Anggota.php
-│       ├── Simpanan.php
-│       ├── Pinjaman.php
-│       └── Angsuran.php
-├── resources/views/
-│   ├── layouts/app.blade.php
-│   ├── auth/login.blade.php
-│   ├── dashboard/index.blade.php
-│   ├── anggota/
-│   ├── transaksi/
-│   └── laporan/
-├── database/
-│   ├── migrations/
-│   └── seeders/
-├── routes/web.php
-└── docs/
-```
-
-## 🤝 Contributing
-
-Kontribusi sangat diterima! Silakan buat Pull Request atau buka Issue untuk bug reports dan feature requests.
-
-## 📄 License
-
-MIT License - lihat file `LICENSE` untuk detail.
-
-## 🙏 Acknowledgments
-
-- Laravel Framework
-- Tailwind CSS
-- Alpine.js
-- Material Symbols Icons
-- Google Fonts (Inter)
-
-## 📞 Kontak & Support
-
-Untuk pertanyaan atau dukungan, silakan buka issue di repository ini.
-
----
-
-**KoperasiKu** - Digitalisasi Administrasi Koperasi Simpan Pinjam 🏦
+Repo ini berisi aplikasi untuk pemakaian lokal. .env, database/data transaksi lokal, vendor, node_modules, arsip ZIP, dan paket InfinityFree tidak disertakan. Migrasi dan seeder disertakan untuk instalasi baru; data presentasi lokal tidak disalin ke GitHub.

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Pinjaman extends Model
 {
     protected $table = 'pinjaman';
+
     protected $primaryKey = 'id_pinjaman';
-    
+
     protected $fillable = [
         'id_anggota',
         'tanggal',
@@ -16,14 +17,14 @@ class Pinjaman extends Model
         'tenor',
         'angsuran_per_bulan',
         'sisa_pinjaman',
-        'status'
+        'status',
     ];
 
     protected $casts = [
         'tanggal' => 'date',
         'jumlah_pinjaman' => 'decimal:2',
         'angsuran_per_bulan' => 'decimal:2',
-        'sisa_pinjaman' => 'decimal:2',
+        'sisa_pinjaman' => 'decimal:2', 'total_jasa' => 'decimal:2', 'sisa_jasa' => 'decimal:2', 'tarif_jasa' => 'decimal:2', 'policy_snapshot' => 'array',
     ];
 
     // Relationships

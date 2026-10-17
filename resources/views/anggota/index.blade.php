@@ -87,7 +87,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <!-- Pagination -->
     <div class="px-6 py-4 border-t border-border">
         {{ $anggota->links() }}
@@ -116,17 +116,17 @@ function confirmDelete(id) {
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = '/anggota/' + id;
-        
+
         const csrfField = document.createElement('input');
         csrfField.type = 'hidden';
         csrfField.name = '_token';
         csrfField.value = '{{ csrf_token() }}';
-        
+
         const methodField = document.createElement('input');
         methodField.type = 'hidden';
         methodField.name = '_method';
         methodField.value = 'DELETE';
-        
+
         form.appendChild(csrfField);
         form.appendChild(methodField);
         document.body.appendChild(form);

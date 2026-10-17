@@ -1,0 +1,4 @@
+@extends('layouts.app')
+@section('content')
+<h1 class="text-3xl font-bold mb-6">Riwayat Aktivitas Admin</h1><div class="bg-surface rounded-xl overflow-x-auto"><table class="w-full text-sm"><thead><tr><th class="p-4 text-left">Waktu</th><th class="p-4 text-left">Admin</th><th class="p-4 text-left">Aktivitas</th><th class="p-4 text-left">Referensi</th></tr></thead><tbody>@forelse($logs as $l)<tr class="border-t"><td class="p-4">{{ $l->created_at }}</td><td class="p-4">{{ $l->actor ?: 'Sistem' }}</td><td class="p-4">{{ $l->action }}</td><td class="p-4">{{ $l->reference }}<br><span class="text-secondary-text">{{ $l->summary }}</span></td></tr>@empty<tr><td colspan="4" class="p-8 text-center">Belum ada aktivitas tercatat.</td></tr>@endforelse</tbody></table></div><div class="mt-4">{{ $logs->links() }}</div>
+@endsection

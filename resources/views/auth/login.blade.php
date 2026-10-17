@@ -3,11 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('fonts/fonts.css') }}">
     <title>KoperasiKu - Login Admin</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -42,7 +39,7 @@
         <!-- Subtle Ambient Glow -->
         <div class="absolute -top-12 -left-12 w-64 h-64 bg-primary-light/20 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl pointer-events-none"></div>
-        
+
         <!-- Main Card -->
         <div class="relative w-full bg-surface rounded-xl shadow-xl p-8 sm:p-10 flex flex-col items-center">
             <!-- Brand & Header -->
@@ -65,13 +62,13 @@
                     Kelola data anggota dan transaksi koperasi dengan mudah.
                 </p>
             </div>
-            
+
             <!-- Security / Role Tag -->
             <div class="mt-4 px-3 py-1 bg-primary-light/30 rounded-full flex items-center gap-1.5">
                 <span class="material-symbols-outlined text-primary text-[16px]">verified_user</span>
                 <span class="text-xs text-primary font-semibold">Portal Akses Pengurus & Admin</span>
             </div>
-            
+
             <!-- Error Alert -->
             @if ($errors->any())
             <div class="w-full mt-5 bg-red-50 text-red-800 rounded-lg p-3.5 flex items-start justify-between shadow-sm">
@@ -84,11 +81,11 @@
                 </div>
             </div>
             @endif
-            
+
             <!-- Login Form -->
             <form class="w-full mt-6 flex flex-col gap-4" method="POST" action="{{ url('/login') }}">
                 @csrf
-                
+
                 <!-- Field: Email -->
                 <div class="flex flex-col gap-1.5 text-left">
                     <label class="text-sm font-medium text-main-text flex items-center justify-between" for="email">
@@ -97,16 +94,16 @@
                     </label>
                     <div class="relative flex items-center">
                         <span class="material-symbols-outlined absolute left-3 text-secondary-text text-[20px] pointer-events-none">account_circle</span>
-                        <input class="w-full h-10 pl-10 pr-3 bg-background rounded-lg text-main-text text-sm focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-secondary-text" 
-                               id="email" 
-                               name="email" 
-                               placeholder="admin@koperasiku.id" 
-                               required 
-                               type="email" 
+                        <input class="w-full h-10 pl-10 pr-3 bg-background rounded-lg text-main-text text-sm focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-secondary-text"
+                               id="email"
+                               name="email"
+                               placeholder="Masukkan Email"
+                               required
+                               type="email"
                                value="{{ old('email') }}">
                     </div>
                 </div>
-                
+
                 <!-- Field: Password -->
                 <div class="flex flex-col gap-1.5 text-left">
                     <label class="text-sm font-medium text-main-text flex items-center justify-between" for="password">
@@ -115,18 +112,18 @@
                     </label>
                     <div class="relative flex items-center">
                         <span class="material-symbols-outlined absolute left-3 text-secondary-text text-[20px] pointer-events-none">lock</span>
-                        <input class="w-full h-10 pl-10 pr-10 bg-background rounded-lg text-main-text text-sm focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-secondary-text" 
-                               id="passwordInput" 
-                               name="password" 
-                               placeholder="Masukkan kata sandi" 
-                               required 
+                        <input class="w-full h-10 pl-10 pr-10 bg-background rounded-lg text-main-text text-sm focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary/40 transition-all placeholder:text-secondary-text"
+                               id="passwordInput"
+                               name="password"
+                               placeholder="Masukkan kata sandi"
+                               required
                                type="password">
                         <button type="button" class="absolute right-3 text-secondary-text hover:text-main-text focus:outline-none flex items-center justify-center p-0.5" id="togglePasswordBtn">
                             <span class="material-symbols-outlined text-[20px]" id="eyeIcon">visibility</span>
                         </button>
                     </div>
                 </div>
-                
+
                 <!-- Options: Remember Me -->
                 <div class="flex items-center justify-between mt-1 text-left">
                     <label class="flex items-center gap-2 cursor-pointer select-none">
@@ -134,14 +131,14 @@
                         <span class="text-sm text-secondary-text">Ingat Saya</span>
                     </label>
                 </div>
-                
+
                 <!-- Submit Button -->
                 <button class="w-full h-11 mt-3 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-semibold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all transform active:scale-[0.99] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" type="submit">
                     <span>Masuk</span>
                     <span class="material-symbols-outlined text-[20px]">login</span>
                 </button>
             </form>
-            
+
             <!-- Security Guarantee Notice -->
             <div class="mt-6 w-full pt-4 bg-transparent flex flex-col items-center text-center gap-2">
                 <div class="flex items-center gap-1.5 text-secondary-text text-center">
@@ -154,7 +151,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         (function() {
             const toggleBtn = document.getElementById('togglePasswordBtn');
