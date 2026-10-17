@@ -1,0 +1,383 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><title>KoperasiKu - Sistem Administrasi Simpan Pinjam</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary-container":"#006f64","surface-container-high":"#dce9ff","surface-container-highest":"#d3e4fe","on-primary-fixed":"#00201d","on-secondary-fixed-variant":"#005048","surface-tint":"#006a63","on-tertiary-fixed-variant":"#224e47","inverse-on-surface":"#eaf1ff","secondary-fixed-dim":"#4fdbc8","on-surface":"#0b1c30","error":"#ba1a1a","primary":"#005c55","surface-bright":"#f8f9ff","surface-container":"#e5eeff","on-primary-fixed-variant":"#00504a","secondary-container":"#6df5e1","on-primary-container":"#a3faef","surface-container-low":"#eff4ff","on-tertiary":"#ffffff","secondary":"#006b5f","tertiary":"#2d5951","primary-fixed-dim":"#80d5cb","background":"#f8f9ff","outline":"#6e7977","on-error-container":"#93000a","error-container":"#ffdad6","on-background":"#0b1c30","inverse-primary":"#80d5cb","tertiary-fixed":"#bdece2","outline-variant":"#bdc9c6","on-secondary-fixed":"#00201c","primary-fixed":"#9cf2e8","surface-container-lowest":"#ffffff","surface":"#f8f9ff","surface-variant":"#d3e4fe","on-secondary":"#ffffff","primary-container":"#0f766e","surface-dim":"#cbdbf5","inverse-surface":"#213145","on-error":"#ffffff","on-tertiary-container":"#c5f3ea","tertiary-container":"#467169","on-primary":"#ffffff","on-tertiary-fixed":"#00201c","tertiary-fixed-dim":"#a2d0c6","on-surface-variant":"#3e4947","secondary-fixed":"#71f8e4"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1.5rem","space-md":"1rem","space-lg":"1.5rem","space-xs":"0.25rem","space-sm":"0.5rem","margin":"2rem","space-xl":"2rem"},"fontFamily":{"body-lg":["Inter"],"display-lg":["Inter"],"label-sm":["Inter"],"headline-md":["Inter"],"body-md":["Inter"],"headline-sm":["Inter"],"currency-display":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"],"label-lg":["Inter"],"label-md":["Inter"]},"fontSize":{"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"display-lg":["32px",{"lineHeight":"40px","fontWeight":"700"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.5px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-sm":["16px",{"lineHeight":"24px","fontWeight":"600"}],"currency-display":["28px",{"lineHeight":"36px","fontWeight":"700"}],"headline-lg":["24px",{"lineHeight":"32px","fontWeight":"600"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","fontWeight":"500"}],"label-md":["12px",{"lineHeight":"16px","fontWeight":"500"}]}}}};</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest flex flex-col justify-between z-50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col flex-1 min-h-0"><div class="h-16 px-gutter flex items-center gap-space-sm bg-surface-container-lowest"><img alt="Logo KoperasiKu" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1XW6jKGPIw-Ud9rDARMEiDDfvs9dihrNHyX_z-yLwE8mhg-Vi-ytKezP90nzmPzLyCYLZdA-rr8bEoWb3iUzytsLq0IVl5x3fH1653k2TENODrlRb6F5zwOAJJhp1vmd9oM40sTyGI2JLoO7XxLFW0-wIZupwr_1YREy3wGbZA5Z8PA5HIsVtGcIPJMm01H-M0pi9TCP9k5IFM6qsLXXBM3a9T_gEQExzFBKSTwREcdjs-lnelJXcKbN6Zt"><div class="flex flex-col leading-none"><span class="font-headline-sm text-headline-sm text-primary tracking-tight">KoperasiKu</span><span class="font-label-sm text-label-sm text-on-surface-variant">Simpan Pinjam</span></div></div><div class="flex-1 overflow-y-auto px-space-md py-space-sm"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-label-lg font-bold rounded-lg shadow-sm"><div class="px-space-sm pt-space-sm pb-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Main</span></div><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="">Dashboard</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Data</span></div><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="anggota" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="">Anggota</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-label-lg font-bold rounded-lg shadow-sm" data-path="form-anggota" href="#"><span class="material-symbols-outlined text-[20px]">person_add</span><span class="">Form Anggota</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Transaksi</span></div><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="transaksi" href="#"><span class="material-symbols-outlined text-[20px]">swap_horiz</span><span class="">Transaksi</span></a><div class="px-space-sm pt-space-md pb-space-xs"><span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Laporan</span></div><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-label-lg text-label-lg" data-path="laporan" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="">Laporan</span></a></nav></div></div><div class="p-space-md bg-surface-container-low m-space-md rounded-xl"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-primary text-[20px]">account_balance</span><div class="flex flex-col"><span class="font-label-md text-label-md text-on-surface font-semibold truncate">KSP Mandiri Sejahtera</span><span class="font-body-sm text-body-sm text-outline">Versi 1.0</span></div></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-md"><button aria-label="Toggle Sidebar" class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[22px]">menu</span></button><nav aria-label="Breadcrumb" class="hidden sm:flex items-center gap-space-xs font-body-sm text-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" data-path="dashboard" href="#">Koperasi</a><span class="material-symbols-outlined text-[14px] text-outline">chevron_right</span><span class="text-on-surface font-label-md text-label-md">Manajemen</span></nav></div><div class="flex items-center gap-space-lg"><div class="hidden md:flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md bg-surface-container-low px-space-md py-space-xs rounded-full"><span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span><span class="">Senin, 20 Mei 2024</span></div><button aria-label="Notifikasi" class="relative p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-0.5 right-0.5 min-w-[16px] h-4 bg-error text-on-error font-label-sm text-[10px] rounded-full flex items-center justify-center px-0.5 font-bold">3</span></button><div class="h-6 w-px bg-surface-container-high"></div><div class="flex items-center gap-space-sm cursor-pointer p-space-xs rounded-lg hover:bg-surface-container-low transition-colors"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4WxQe1L0tyJjdIM71TDk8xrN2GJuX4X2EYJJjlzqUEzQIegb5R2RXjRZLHhIiq7_HkDbQDbyVzgkqWsu33oU5FLq_Cv5AYrM1oDjSEZpOcvtrEmO3vZdOOdupO5cDLCcyZQuTsVn43w1exLtwscVvpnRliaZKw5sCQEr8sTL4g3ujm-aG9rCu5SffvH-9g8fXrD--iXOuL59jYqL-WiZhjv1BSYlOuuCV5PNYd5-IJvcuK108Nbc3Dw"><div class="hidden lg:flex flex-col text-left"><span class="font-label-lg text-label-lg text-on-surface font-semibold leading-tight">Budi Santoso, S.E.</span><span class="font-body-sm text-body-sm text-outline leading-none">Admin Koperasi</span></div><span class="material-symbols-outlined text-[18px] text-on-surface-variant">expand_more</span></div></div></header><main class="w-full pt-16 bg-background flex-1"><div class="w-full max-w-[1440px] mx-auto p-margin"><div class="flex flex-col w-full">
+<!-- Top Bar / Page Header Context -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-space-xs font-body-sm text-body-sm text-outline mb-space-xs">
+<span class="">Koperasi</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="">Anggota</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-label-md text-label-md font-semibold">Form Anggota</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Form Anggota</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Tambah atau perbarui data keanggotaan koperasi simpan pinjam.</p>
+</div>
+<!-- Quick Action / Status Badge -->
+<div class="flex items-center gap-space-sm self-start md:self-auto">
+<div class="flex items-center gap-space-xs bg-surface-container px-space-md py-space-xs rounded-full shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-wider">Mode: Tambah Anggota Baru</span>
+</div>
+<button class="flex items-center gap-space-xs bg-surface-container-lowest hover:bg-surface-container text-on-surface-variant px-space-md py-space-xs rounded-lg shadow-sm transition-colors font-label-md text-label-md" onclick="resetForm()" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span class="">Reset Field</span>
+</button>
+</div>
+</div>
+<!-- Main 2-Column Responsive Workspace (70% Form, 30% Helper & Context) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Main Form Card (Approx 70% / 8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Primary Form Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg md:p-space-xl flex flex-col gap-space-lg relative overflow-hidden">
+<!-- Subtle Institutional Top Accent Glow -->
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary via-secondary to-primary-fixed"></div>
+<!-- Form Card Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-md bg-surface-container-lowest">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">badge</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Formulir Pendaftaran &amp; Perubahan Data Anggota</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pastikan seluruh data identitas kependudukan terisi valid sesuai dokumen resmi.</p>
+</div>
+</div>
+<span class="self-start sm:self-auto font-label-sm text-label-sm text-primary bg-surface-container-high px-space-sm py-space-xs rounded-md">ID #AG007</span>
+</div>
+<!-- Realtime Validation Banner -->
+<div class="flex items-start gap-space-sm p-space-md rounded-lg bg-surface-container-low transition-all" id="validation-banner"><span class="material-symbols-outlined text-primary text-[20px] mt-0.5">verified_user</span><div class="flex-1"><h4 class="font-label-lg text-label-lg text-on-surface font-semibold">Validasi Identitas</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Pastikan NIK 16 digit sesuai KTP dan data kontak anggota aktif.</p></div></div>
+<!-- Form Body -->
+<form class="flex flex-col gap-space-lg" id="member-form" onsubmit="handleFormSubmit(event)">
+<!-- Field Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-space-lg gap-y-space-md">
+<!-- 1. ID Anggota (Auto Generated Readonly) -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1">
+                  ID Anggota
+                </label>
+<span class="font-label-sm text-label-sm text-primary bg-primary/10 px-2 py-0.5 rounded-full font-bold">Otomatis dari Sistem</span>
+</div>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-outline material-symbols-outlined text-[20px]">pin</span>
+<input class="w-full h-10 pl-10 pr-3 bg-surface-container-low text-on-surface font-label-lg text-label-lg rounded-lg cursor-not-allowed focus:outline-none" name="id_anggota" readonly="" type="text" value="AG007">
+</div>
+<p class="font-body-sm text-body-sm text-outline">Nomor registrasi unik berurutan pada buku besar anggota.</p>
+</div>
+<!-- 2. Status Keanggotaan & Toggle -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1">
+                  Status Anggota <span class="text-error">*</span>
+</label>
+<span class="font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800" id="status-badge">
+                  Aktif
+                </span>
+</div>
+<div class="h-10 px-space-md bg-surface-container-low rounded-lg flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">toggle_on</span>
+                  Kepesertaan Aktif Simpan Pinjam
+                </span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="status-toggle" onchange="toggleMemberStatus(this)" type="checkbox">
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Anggota nonaktif tidak dapat mengajukan pinjaman baru.</p>
+</div>
+<!-- 3. Nama Lengkap (Required + Validation Indicator) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="nama_lengkap">
+                Nama Lengkap Sesuai KTP <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-outline material-symbols-outlined text-[20px]">person</span>
+<input class="w-full h-10 pl-10 pr-10 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:outline-none transition-all" id="nama_lengkap" name="nama_lengkap" oninput="validateName(this)" placeholder="Masukkan nama lengkap sesuai KTP" required="" type="text" value="Bambang Trihatmodjo">
+<span class="absolute right-3 text-emerald-600 material-symbols-outlined text-[20px]" id="name-valid-icon">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-emerald-700 flex items-center gap-1" id="name-helper">
+<span class="material-symbols-outlined text-[14px]">done</span> Sesuai data identitas kependudukan
+              </p>
+</div>
+<!-- 4. NIK (16 Digits with validation) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="nik">
+                NIK (Nomor Induk Kependudukan) <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-outline material-symbols-outlined text-[20px]">fingerprint</span>
+<input class="w-full h-10 pl-10 pr-10 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none transition-all" id="nik" maxlength="16" name="nik" oninput="validateNIK(this)" placeholder="16 digit NIK resmi KTP" required="" type="text" value="3204121908850003">
+<span class="absolute right-3 text-emerald-600 material-symbols-outlined text-[20px]" id="nik-valid-icon">check_circle</span>
+</div>
+<div class="flex justify-between items-center font-body-sm text-body-sm">
+<span class="text-emerald-700 flex items-center gap-1" id="nik-helper">
+<span class="material-symbols-outlined text-[14px]">check</span> Format data KTP &amp; NIK terverifikasi (16 Digit)
+                </span>
+<span class="text-outline font-mono" id="nik-counter">16/16</span>
+</div>
+</div>
+<!-- 5. No. Telepon / WhatsApp (With Prefix block) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="telepon">Nomor Telepon <span class="text-error">*</span></label>
+<div class="flex rounded-lg shadow-sm overflow-hidden focus-within:ring-2 focus-within:ring-primary">
+<div class="flex items-center gap-1 bg-surface-container-high px-3 text-on-surface-variant font-label-md text-label-md font-semibold select-none">
+<span class="">🇮🇩</span>
+<span class="">+62</span>
+</div>
+<input class="w-full h-10 px-3 bg-surface-container-lowest text-on-surface focus:outline-none" id="telepon" name="telepon" placeholder="812-xxxx-xxxx" required="" type="tel" value="81234567890">
+</div>
+<p class="font-body-sm text-body-sm text-outline">Nomor telepon aktif anggota.</p>
+</div>
+<!-- 6. Jenis Kelamin (Material Chip Radio Segment) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1">
+                Jenis Kelamin <span class="text-error">*</span>
+</label>
+<div class="grid grid-cols-2 gap-space-sm h-10">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="gender" type="radio" value="L">
+<div class="h-full flex items-center justify-center gap-space-xs rounded-lg bg-surface-container-low text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container font-label-md text-label-md font-semibold transition-all">
+<span class="material-symbols-outlined text-[18px]">male</span>
+<span class="">Laki-laki</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="gender" type="radio" value="P">
+<div class="h-full flex items-center justify-center gap-space-xs rounded-lg bg-surface-container-low text-on-surface-variant peer-checked:bg-primary-container peer-checked:text-on-primary-container font-label-md text-label-md font-semibold transition-all">
+<span class="material-symbols-outlined text-[18px]">female</span>
+<span class="">Perempuan</span>
+</div>
+</label>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Identitas demografis anggota terdaftar.</p>
+</div>
+<!-- 7. Tanggal Bergabung (Default Current Date) -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="tanggal_bergabung">
+                Tanggal Bergabung <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-outline material-symbols-outlined text-[20px]">calendar_month</span>
+<input class="w-full h-10 pl-10 pr-3 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none" id="tanggal_bergabung" name="tanggal_bergabung" required="" type="date" value="2024-05-20">
+</div>
+<p class="font-body-sm text-body-sm text-outline">Tanggal sah SK keanggotaan diterbitkan pengurus.</p>
+</div>
+<!-- 8. Pekerjaan / Profesi Utama -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold" for="pekerjaan">
+                Pekerjaan / Sumber Pendapatan
+              </label>
+<div class="relative flex items-center">
+<span class="absolute left-3 text-outline material-symbols-outlined text-[20px]">work</span>
+<select class="w-full h-10 pl-10 pr-8 bg-surface-container-lowest text-on-surface rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none appearance-none" id="pekerjaan" name="pekerjaan">
+<option selected="" value="karyawan_swasta">Karyawan Swasta</option>
+<option value="pns">PNS / ASN / BUMN</option>
+<option value="wiraswasta">Wiraswasta / Pemilik Usaha</option>
+<option value="petani_peternak">Petani / Peternak</option>
+<option value="guru_dosen">Pendidik / Tenaga Kependidikan</option>
+<option value="lainnya">Lainnya</option>
+</select>
+<span class="absolute right-3 text-outline pointer-events-none material-symbols-outlined text-[18px]">expand_more</span>
+</div>
+<p class="font-body-sm text-body-sm text-outline">Profil risiko plafon pembiayaan pinjaman.</p>
+</div>
+<!-- 9. Alamat Lengkap (Full Width Span 2) -->
+<div class="col-span-1 md:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex items-center gap-1" for="alamat">
+                Alamat Lengkap Sesuai KTP <span class="text-error">*</span>
+</label>
+<div class="relative">
+<textarea class="w-full p-space-sm bg-surface-container-lowest text-on-surface rounded-lg shadow-sm focus:ring-2 focus:ring-primary focus:outline-none resize-none font-body-md text-body-md" id="alamat" name="alamat" placeholder="Masukkan jalan, RT/RW, kelurahan, kecamatan, dan kota domisili sesuai KTP..." required="" rows="3">Jl. Sukasenang No. 42, RT 03 / RW 08, Cikutra, Kec. Cibeunying Kidul, Kota Bandung, Jawa Barat 40124</textarea>
+</div>
+<div class="flex justify-between items-center font-body-sm text-body-sm text-outline">
+<span class="">Mohon sertakan kode pos jika ada untuk surat menyurat resmi.</span>
+<span class="text-primary font-medium">Valid Terisi</span>
+</div>
+</div>
+</div>
+<!-- Section Divider with Chip -->
+<div class="relative my-space-xs flex items-center justify-center">
+<div class="w-full h-px bg-surface-container-high"></div>
+<span class="absolute bg-surface-container-lowest px-space-md font-label-sm text-label-sm text-outline uppercase tracking-wider">Komitmen Awal Anggota</span>
+</div>
+<!-- Setoran Pokok & Simpanan Wajib Preview Card -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md p-space-md bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-space-md">
+<div class="w-11 h-11 rounded-lg bg-surface-container-lowest flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">payments</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block uppercase">Simpanan Pokok (1x)</span>
+<span class="font-headline-sm text-headline-sm text-primary">Rp 100.000</span>
+<span class="font-body-sm text-body-sm text-outline block">Disetor tunai saat terdaftar</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="w-11 h-11 rounded-lg bg-surface-container-lowest flex items-center justify-center text-secondary shadow-sm">
+<span class="material-symbols-outlined text-[24px]">savings</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline block uppercase">Simpanan Wajib Bulanan</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Rp 50.000 <span class="font-body-sm text-body-sm text-outline font-normal">/bln</span></span>
+<span class="font-body-sm text-body-sm text-outline block">Jatuh tempo tgl 10 tiap bulan</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons Deck -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-md">
+<!-- Secondary Left Action -->
+<button class="w-full sm:w-auto h-10 px-space-lg bg-surface-container-lowest hover:bg-surface-container text-on-surface font-label-lg text-label-lg rounded-lg shadow-sm transition-all flex items-center justify-center gap-space-xs" onclick="window.history.back()" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="">Batal</span>
+</button>
+<!-- Main Primary Right Actions -->
+<div class="w-full sm:w-auto flex flex-col sm:flex-row items-center gap-space-sm">
+<button class="w-full sm:w-auto h-10 px-space-md text-primary hover:bg-surface-container-high rounded-lg font-label-lg text-label-lg transition-colors flex items-center justify-center gap-space-xs" name="action" type="submit" value="save_and_add">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Simpan &amp; Tambah Lainnya</span>
+</button>
+<button class="w-full sm:w-auto h-11 px-space-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg rounded-lg shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-space-xs" name="action" type="submit" value="save">
+<span class="material-symbols-outlined text-[20px]">save</span>
+<span class="font-bold">Simpan Data Anggota</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+<!-- Quick Tips Strip for Academic/Web Programming II standard -->
+
+</div>
+<!-- RIGHT COLUMN: Guidelines, Membership Verification & Document Requirements (Approx 30% / 4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Card: Syarat & Ketentuan Keanggotaan -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md">
+<div class="flex items-center gap-space-sm pb-space-sm bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Syarat Keanggotaan</h3>
+<span class="font-body-sm text-body-sm text-outline">AD/ART KSP Mandiri Bab IV</span>
+</div>
+</div>
+<ul class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check_circle</span>
+<span class="">Warga Negara Indonesia (WNI) cakap hukum dan berdomisili sah terdaftar.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check_circle</span>
+<span class="">Melampirkan fotokopi KTP / identitas resmi yang masih berlaku (NIK valid 16 digit).</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check_circle</span>
+<span class="">Membayar <strong>Simpanan Pokok awal sebesar Rp 100.000</strong> secara tunai / transfer kas koperasi.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check_circle</span>
+<span class="">Bersedia menyetor <strong>Simpanan Wajib Rp 50.000/bulan</strong> secara berkesinambungan.</span>
+</li>
+<li class="flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check_circle</span>
+<span class="">Menyetujui ketentuan pembagian Sisa Hasil Usaha (SHU) tahunan.</span>
+</li>
+</ul>
+<!-- Visual Verification Progress Bar -->
+<div class="mt-space-xs pt-space-sm bg-surface-container-low p-space-md rounded-lg flex flex-col gap-space-xs">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-on-surface font-semibold">Kelengkapan Berkas Form</span>
+<span class="text-primary font-bold">100% Siap</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-full transition-all duration-500"></div>
+</div>
+<span class="font-body-sm text-body-sm text-outline">Semua field formulir mandatori terisi lengkap.</span>
+</div>
+</div>
+<!-- Card: Foto Identitas & Dokumen Pendukung (Material Card) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-lg flex flex-col gap-space-md"><div class="flex items-center gap-space-sm pb-space-sm bg-surface-container-lowest"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary"><span class="material-symbols-outlined text-[18px]">info</span></div><div><h3 class="font-headline-sm text-headline-sm text-on-surface">Petunjuk Pengisian</h3><span class="font-body-sm text-body-sm text-outline">Panduan Administrasi</span></div></div><div class="flex flex-col gap-space-sm font-body-sm text-body-sm text-on-surface-variant"><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check</span><span class="">Pastikan NIK 16 digit telah sesuai dengan data identitas kependudukan.</span></div><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check</span><span class="">Nomor telepon digunakan untuk pengiriman laporan transaksi dan notifikasi simpan pinjam.</span></div><div class="flex items-start gap-space-xs"><span class="material-symbols-outlined text-primary text-[18px] mt-0.5 shrink-0">check</span><span class="">Status anggota aktif diperlukan agar anggota dapat mengajukan fasilitas pembiayaan.</span></div></div></div>
+<!-- Card: Quick Contact & Help Desk -->
+
+</div>
+</div>
+</div>
+<script>
+  function validateName(input) {
+    const icon = document.getElementById('name-valid-icon');
+    const helper = document.getElementById('name-helper');
+    if (input.value.trim().length >= 3) {
+      icon.classList.remove('hidden');
+      icon.innerText = 'check_circle';
+      icon.className = 'absolute right-3 text-emerald-600 material-symbols-outlined text-[20px]';
+      helper.className = 'font-body-sm text-body-sm text-emerald-700 flex items-center gap-1';
+      helper.innerHTML = '<span class="material-symbols-outlined text-[14px]">done</span> Sesuai data identitas kependudukan';
+    } else {
+      icon.classList.remove('hidden');
+      icon.innerText = 'error';
+      icon.className = 'absolute right-3 text-error material-symbols-outlined text-[20px]';
+      helper.className = 'font-body-sm text-body-sm text-error flex items-center gap-1';
+      helper.innerHTML = '<span class="material-symbols-outlined text-[14px]">close</span> Nama minimal 3 karakter';
+    }
+  }
+
+  function validateNIK(input) {
+    // Only accept numbers
+    input.value = input.value.replace(/[^0-9]/g, '');
+    const counter = document.getElementById('nik-counter');
+    const helper = document.getElementById('nik-helper');
+    const icon = document.getElementById('nik-valid-icon');
+    const len = input.value.length;
+
+    counter.innerText = `${len}/16`;
+
+    if (len === 16) {
+      icon.innerText = 'check_circle';
+      icon.className = 'absolute right-3 text-emerald-600 material-symbols-outlined text-[20px]';
+      helper.className = 'text-emerald-700 flex items-center gap-1';
+      helper.innerHTML = '<span class="material-symbols-outlined text-[14px]">check</span> Format data KTP & NIK terverifikasi (16 Digit)';
+    } else {
+      icon.innerText = 'info';
+      icon.className = 'absolute right-3 text-amber-600 material-symbols-outlined text-[20px]';
+      helper.className = 'text-amber-700 flex items-center gap-1';
+      helper.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> Wajib tepat 16 digit angka sesuai KTP';
+    }
+  }
+
+  function toggleMemberStatus(checkbox) {
+    const badge = document.getElementById('status-badge');
+    if (checkbox.checked) {
+      badge.textContent = 'Aktif';
+      badge.className = 'font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800';
+    } else {
+      badge.textContent = 'Nonaktif';
+      badge.className = 'font-label-sm text-label-sm px-2.5 py-0.5 rounded-full font-semibold bg-rose-100 text-rose-800';
+    }
+  }
+
+  function resetForm() {
+    if (confirm('Apakah Anda yakin ingin mengosongkan kembali seluruh input formulir?')) {
+      document.getElementById('member-form').reset();
+      document.getElementById('nik-counter').innerText = '0/16';
+    }
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const submitBtn = e.submitter;
+    const originalText = submitBtn.innerHTML;
+    
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">autorenew</span> Memproses...';
+    
+    setTimeout(() => {
+      alert('Data Anggota #AG007 berhasil tersimpan ke dalam database KoperasiKu!');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }, 800);
+  }
+</script></div></main></div>
+
+</body></html>
